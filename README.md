@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# To-do List (React)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Simple To-do List app built with Create React App. Add tasks, mark them as done, and they will be removed after a short visual confirmation.
 
-## Available Scripts
+**Description:**
 
-In the project directory, you can run:
+- This small app stores a list of tasks in component state and renders them under `src/components`.
+- The previous `Delete` action has been replaced by a `Done` button which applies a line-through decoration and then removes the item.
 
-### `npm start`
+**Behavior note:** Clicking the `Done` button applies a `text-decoration: line-through` to the item and after ~600ms the item is removed from the list. That delay is implemented in `src/components/TodoItem.jsx` (change the timeout there to adjust how long the line-through is visible).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Prerequisites**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js (v14+ recommended)
+- npm (bundled with Node) or Yarn
 
-### `npm test`
+**Install**
+Run from the project root:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```powershell
+npm install
+```
 
-### `npm run build`
+**Run (development)**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```powershell
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Open `http://localhost:3000` in your browser. This project was scaffolded with Create React App, so the standard CRA scripts are available (see `package.json`).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Project structure (important files)**
 
-### `npm run eject`
+- `src/App.js` — main app component, holds task list state and delete handler.
+- `src/components/TodoInput.jsx` — input field and add button.
+- `src/components/TodoList.jsx` — renders the list and passes delete callbacks.
+- `src/components/TodoItem.jsx` — updated so the `Done` button applies a `.done` class and calls the parent delete handler after a short delay.
+- `src/styles.css` — styles including `.todo-text.done { text-decoration: line-through; }` and the `.done-btn` styles.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**How the Done -> Remove flow works**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. User clicks the `Done` button rendered by `TodoItem`.
+2. `TodoItem` sets local `done` state to `true` (adds `.done` class so the line-through is visible).
+3. After 600ms `TodoItem` calls the `onDelete` callback passed from the parent (`App`) to remove the item from the list.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+If you prefer instant removal without the visual confirmation, change the `setTimeout` delay in `src/components/TodoItem.jsx` or call `onDelete` immediately.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Development notes**
 
-## Learn More
+- To change the delay: edit `src/components/TodoItem.jsx` and update the `setTimeout` value.
+- To add a separate Delete button instead of replacing it, restore the original `delete` button and keep `Done` as a separate action.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Testing**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Run unit or integration tests with:
 
-### Code Splitting
+```powershell
+npm test
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Contributing**
 
-### Analyzing the Bundle Size
+- Small, focused PRs are welcome. Describe changes and include a short test case if relevant.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**License**
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- This repository does not include a license file. Add one if you plan to share publicly.
