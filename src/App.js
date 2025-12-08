@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
+import QuoteBanner from "./components/QuoteBanner";
 import "./styles.css";
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
       <h1>Todo List</h1>
       <TodoInput onAdd={addTask} />
       <TodoList items={list} onDelete={deleteTask} />
+      <QuoteBanner />
     </div>
   );
 }
