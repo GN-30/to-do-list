@@ -8,16 +8,26 @@ export default function TodoInput({ onAdd }) {
     setTask("");
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      addItem();
+    }
+  };
+
   return (
-    <div className="input-box">
+    <div className="todo-input">
       <input
         type="text"
         placeholder="Enter a task..."
         value={task}
         onChange={(e) => setTask(e.target.value)}
+        onKeyPress={handleKeyPress}
+        className="input"
       />
 
-      <button onClick={addItem}>Add</button>
+      <button onClick={addItem} className="btn btn-primary">
+        Add
+      </button>
     </div>
   );
 }

@@ -9,10 +9,7 @@ export default function TodoItem({ item, onDelete }) {
     if (done) return;
     // mark visually done
     setDone(true);
-    // trigger blast animation and congrats message
     setShowBlast(true);
-    // hide blast shortly after
-    setTimeout(() => setShowBlast(false), 700);
     // after animation, call onDelete to remove
     setTimeout(() => {
       if (typeof onDelete === "function") onDelete();
@@ -25,19 +22,16 @@ export default function TodoItem({ item, onDelete }) {
       <button className="done-btn" onClick={handleDoneClick} disabled={done}>
         Done
       </button>
-
       {showBlast && (
-        <div className="blast" aria-hidden>
-          <div className="popper" />
-          <div className="confetti conf-1" />
-          <div className="confetti conf-2" />
-          <div className="confetti conf-3" />
-          <div className="confetti conf-4" />
-          <div className="confetti conf-5" />
-          <div className="confetti conf-6" />
-          <div className="congrats" role="status">
-            Congratulations!
-          </div>
+        <div className="blast">
+          <div className="popper"></div>
+          <div className="confetti conf-1"></div>
+          <div className="confetti conf-2"></div>
+          <div className="confetti conf-3"></div>
+          <div className="confetti conf-4"></div>
+          <div className="confetti conf-5"></div>
+          <div className="confetti conf-6"></div>
+          <div className="congrats">✨ Great!</div>
         </div>
       )}
     </li>

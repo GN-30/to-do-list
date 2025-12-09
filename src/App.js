@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
-import QuoteBanner from "./components/QuoteBanner";
 import "./styles.css";
 
 export default function App() {
@@ -9,11 +8,15 @@ export default function App() {
 
   const addTask = (task) => {
     if (task.trim() === "") return;
-    setList([...list, task]);
+    const newTask = {
+      id: Date.now(),
+      text: task
+    };
+    setList([...list, newTask]);
   };
 
-  const deleteTask = (index) => {
-    const updatedList = list.filter((_, i) => i !== index);
+  const deleteTask = (id) => {
+    const updatedList = list.filter((item) => item.id !== id);
     setList(updatedList);
   };
 
@@ -22,7 +25,6 @@ export default function App() {
       <h1>Todo List</h1>
       <TodoInput onAdd={addTask} />
       <TodoList items={list} onDelete={deleteTask} />
-      <QuoteBanner />
     </div>
   );
 }
